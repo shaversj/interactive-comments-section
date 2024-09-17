@@ -16,7 +16,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${rubik.variable} bg-light-gray min-h-screen w-full antialiased`}>{children}</body>
+      <body className={`${rubik.variable} bg-very-light-gray min-h-screen w-full antialiased`}>{children}</body>
     </html>
   );
 }
