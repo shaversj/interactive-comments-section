@@ -3,6 +3,7 @@ import UserCommentContainer from "@/components/comment/UserCommentContainer";
 import Vote from "@/components/comment/Vote";
 import data from "@/data/data.json";
 import UserReplyContainer from "@/components/comment/UserReplyContainer";
+import AddComment from "@/components/comment/AddComment";
 
 export default function Home() {
   return (
@@ -29,6 +30,8 @@ export default function Home() {
             )}
           </>
         ))}
+
+        <AddComment user={data.currentUser} />
       </div>
     </div>
   );
