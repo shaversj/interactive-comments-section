@@ -1,10 +1,8 @@
-import UserComment from "@/components/comment/UserComment";
-import UserCommentContainer from "@/components/comment/UserCommentContainer";
-import Vote from "@/components/comment/Vote";
 import data from "@/data/data.json";
 import UserReplyContainer from "@/components/comment/UserReplyContainer";
 import AddComment from "@/components/comment/AddComment";
 import React from "react";
+import UserCommentCard from "@/components/comment/UserCommentCard";
 
 export default function Home() {
   return (
@@ -12,21 +10,13 @@ export default function Home() {
       <div className={"space-y-5"}>
         {data.comments.map((comment: UserComment) => (
           <React.Fragment key={comment.id}>
-            <UserCommentContainer key={comment.id}>
-              <Vote comment={comment} />
-              <UserComment comment={comment} />
-            </UserCommentContainer>
+            <UserCommentCard comment={comment} currentUser={data.currentUser} />
 
             {comment.replies && comment.replies.length > 0 && (
               <UserReplyContainer>
                 {comment.replies &&
                   comment.replies.length > 0 &&
-                  comment.replies.map((reply: UserComment) => (
-                    <UserCommentContainer key={reply.id}>
-                      <Vote comment={reply} />
-                      <UserComment comment={reply} />
-                    </UserCommentContainer>
-                  ))}
+                  comment.replies.map((reply: UserComment) => <UserCommentCard key={reply.id} comment={reply} currentUser={data.currentUser} />)}
               </UserReplyContainer>
             )}
           </React.Fragment>
