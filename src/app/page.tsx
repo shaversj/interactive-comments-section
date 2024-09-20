@@ -1,8 +1,8 @@
-import data from "@/data/data.json";
-import UserReplyContainer from "@/components/comment/UserReplyContainer";
-import AddComment from "@/components/comment/AddComment";
 import React from "react";
+import data from "@/data/data.json";
+import AddComment from "@/components/comment/AddComment";
 import UserCommentCard from "@/components/comment/UserCommentCard";
+import ReplyLayout from "@/components/comment/ReplyLayout";
 
 export default function Home() {
   return (
@@ -11,17 +11,15 @@ export default function Home() {
         {data.comments.map((comment: UserComment) => (
           <React.Fragment key={comment.id}>
             <UserCommentCard comment={comment} currentUser={data.currentUser} />
-
             {comment.replies && comment.replies.length > 0 && (
-              <UserReplyContainer>
-                {comment.replies &&
-                  comment.replies.length > 0 &&
-                  comment.replies.map((reply: UserComment) => <UserCommentCard key={reply.id} comment={reply} currentUser={data.currentUser} />)}
-              </UserReplyContainer>
+              <ReplyLayout>
+                {comment.replies.map((reply: UserComment) => (
+                  <UserCommentCard key={reply.id} comment={reply} currentUser={data.currentUser} />
+                ))}
+              </ReplyLayout>
             )}
           </React.Fragment>
         ))}
-
         <AddComment user={data.currentUser} />
       </div>
     </div>

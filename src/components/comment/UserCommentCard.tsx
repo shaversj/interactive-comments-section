@@ -14,11 +14,13 @@ export default function UserCommentCard({ comment, currentUser }: UserCommentCar
   const [showReply, setShowReply] = useState(false);
   return (
     <>
-      <div className={`col-start-2 col-end-2 flex h-[167px] gap-x-6 rounded-xl bg-white p-6 ${showReply && "-mb-3"}`}>
-        <Vote comment={comment} />
-        <UserComment comment={comment} showReply={showReply} setShowReply={setShowReply} />
+      <div className={""}>
+        <div className={`col-start-2 col-end-2 ml-5 flex h-[167px] gap-x-6 rounded-xl bg-white p-6 ${showReply && "-mb-3"}`}>
+          <Vote comment={comment} />
+          <UserComment comment={comment} showReply={showReply} setShowReply={setShowReply} />
+        </div>
+        {showReply && <AddComment user={currentUser} buttonText={"Reply"} />}
       </div>
-      {showReply && <AddComment user={currentUser} buttonText={"Reply"} />}
     </>
   );
 }

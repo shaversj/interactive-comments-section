@@ -16,7 +16,10 @@ export default function UserComment({ comment, showReply, setShowReply }: UserCo
         <Image className={"inline-block"} src={comment.user.image.png} alt={"Avatar"} width={32} height={32} />
         <span className={"text-[1rem] font-semibold leading-[19px] text-dark-blue"}>{comment.user.username}</span>
         <span className={"inline text-[1rem] leading-6 text-grayish-blue"}>{comment.createdAt}</span>
-        <button onClick={() => setShowReply && setShowReply(!showReply)} className={"ml-auto flex items-center gap-x-[5.25px] font-semibold leading-6 text-moderate-blue"}>
+        <button
+          onClick={() => setShowReply && setShowReply(!showReply)}
+          className={"ml-auto flex items-center gap-x-[5.25px] font-semibold leading-6 text-moderate-blue"}
+        >
           <Reply />
           Reply
         </button>
