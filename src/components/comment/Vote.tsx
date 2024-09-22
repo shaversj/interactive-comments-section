@@ -12,7 +12,7 @@ export default function Vote({ comment }: Readonly<{ comment: UserComment }>) {
         <Plus />
       </button>
 
-      <span className={"font-bold text-moderate-blue"}>{score}</span>
+      <span className={"font-medium text-moderate-blue"}>{score}</span>
       <button onClick={() => setScore(score - 1)}>
         <Minus />
       </button>
