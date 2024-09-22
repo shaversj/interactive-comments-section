@@ -4,6 +4,7 @@ import Image from "next/image";
 import Reply from "@/components/icons/Reply";
 import Delete from "@/components/icons/Delete";
 import Edit from "@/components/icons/Edit";
+import { useState } from "react";
 
 type UserCommentProps = {
   comment: UserComment;
@@ -13,6 +14,8 @@ type UserCommentProps = {
 };
 
 export default function UserComment({ comment, currentUser, showReply, setShowReply }: UserCommentProps) {
+  const [isEditing, setIsEditing] = useState(false);
+
   return (
     <div className={"flex w-full flex-col"}>
       <div className={"flex items-center gap-x-4"}>
@@ -35,7 +38,7 @@ export default function UserComment({ comment, currentUser, showReply, setShowRe
                 <span className={"mt-1 font-medium leading-6 text-soft-red group-hover/delete:text-pale-red"}>Delete</span>
               </button>
 
-              <button className={"group/edit flex items-center gap-x-[8.33px]"}>
+              <button onClick={() => setIsEditing(!isEditing)} className={"group/edit flex items-center gap-x-[8.33px]"}>
                 <Edit className={"fill-[#5357B6] group-hover/edit:fill-light-grayish-blue"} />
                 <span className={"mt-1 font-medium leading-6 text-moderate-blue group-hover/edit:text-light-grayish-blue"}>Edit</span>
               </button>
@@ -55,7 +58,27 @@ export default function UserComment({ comment, currentUser, showReply, setShowRe
           </>
         )}
       </div>
-      <p className={"pt-[0.938rem] text-[1rem] leading-6 text-grayish-blue"}>{comment.content}</p>
+
+      {isEditing ? (
+        <div className={"flex flex-col"}>
+          <textarea
+            className={
+              "focus:outline-outline-red-600 mt-[0.938rem] h-[7.875rem] w-[31.625rem] rounded-xl border border-light-gray px-6 py-3 text-[1rem] text-grayish-blue focus:outline-2 focus:outline-moderate-blue"
+            }
+            placeholder={"Add a comment..."}
+            value={comment.content}
+          ></textarea>
+          <button
+            className={
+              "ml-auto mt-4 h-[3rem] w-[6.5rem] self-start rounded-lg bg-moderate-blue text-[1rem] font-semibold uppercase leading-6 text-light-gray hover:bg-light-grayish-blue"
+            }
+          >
+            UPDATE
+          </button>
+        </div>
+      ) : (
+        <p className={"pt-[0.938rem] text-[1rem] leading-6 text-grayish-blue"}>{comment.content}</p>
+      )}
     </div>
   );
 }

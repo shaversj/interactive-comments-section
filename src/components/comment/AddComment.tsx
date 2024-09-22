@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-export default function AddComment({ user, buttonText = "Send" }: Readonly<{ user: User; buttonText?: string }>) {
+export default function AddComment({ user, buttonText = "Send", value }: Readonly<{ user: User; buttonText?: string; value?: string }>) {
   return (
     <>
       <div className={"ml-5 mt-5 flex h-[9rem] min-w-0 items-center gap-x-4 rounded-xl bg-white p-6"}>
@@ -10,6 +10,7 @@ export default function AddComment({ user, buttonText = "Send" }: Readonly<{ use
             "focus:outline-outline-red-600 h-full w-[31.625rem] rounded-xl border border-light-gray px-6 py-3 text-[1rem] text-grayish-blue focus:outline-2 focus:outline-moderate-blue"
           }
           placeholder={"Add a comment..."}
+          value={value}
         ></textarea>
         <button
           className={
