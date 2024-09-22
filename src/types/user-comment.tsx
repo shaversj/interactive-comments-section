@@ -15,3 +15,8 @@ type User = {
   };
   username: string;
 };
+
+type CommentData = {
+  currentUser: User;
+  comments: UserComment[];
+};

@@ -5,16 +5,26 @@ import Reply from "@/components/icons/Reply";
 import Delete from "@/components/icons/Delete";
 import Edit from "@/components/icons/Edit";
 import { useState } from "react";
+import { CommentAction } from "@/components/useComments";
 
 type UserCommentProps = {
   comment: UserComment;
   currentUser: User;
   showReply?: boolean;
   setShowReply?: (showReply: boolean) => void;
+  dispatch?: React.Dispatch<CommentAction>;
 };
 
-export default function UserComment({ comment, currentUser, showReply, setShowReply }: UserCommentProps) {
+export default function UserComment({ comment, currentUser, showReply, setShowReply, dispatch }: UserCommentProps) {
   const [isEditing, setIsEditing] = useState(false);
+  const [commentContent, setCommentContent] = useState(comment.content);
+
+  function handleUpdate(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const textAreaValue = (e.target as HTMLFormElement).querySelector("textarea")?.value;
+    dispatch && dispatch({ type: "UPDATE", payload: { id: comment.id, body: textAreaValue || "" } });
+    setIsEditing(false);
+  }
 
   return (
     <div className={"flex w-full flex-col"}>
@@ -33,7 +43,10 @@ export default function UserComment({ comment, currentUser, showReply, setShowRe
         {currentUser.username === comment.user.username ? (
           <>
             <div className={"ml-auto flex gap-x-6"}>
-              <button className={"group/delete flex items-center gap-x-[8.33px]"}>
+              <button
+                onClick={() => dispatch && dispatch({ type: "DELETE", payload: comment.id })}
+                className={"group/delete flex items-center gap-x-[8.33px]"}
+              >
                 <Delete className={"fill-[#ED6368] group-hover/delete:fill-pale-red"} />
                 <span className={"mt-1 font-medium leading-6 text-soft-red group-hover/delete:text-pale-red"}>Delete</span>
               </button>
@@ -60,24 +73,26 @@ export default function UserComment({ comment, currentUser, showReply, setShowRe
       </div>
 
       {isEditing ? (
-        <div className={"flex flex-col"}>
+        <form onSubmit={handleUpdate} className={"flex flex-col"}>
           <textarea
             className={
               "focus:outline-outline-red-600 mt-[0.938rem] h-[7.875rem] w-[31.625rem] rounded-xl border border-light-gray px-6 py-3 text-[1rem] text-grayish-blue focus:outline-2 focus:outline-moderate-blue"
             }
             placeholder={"Add a comment..."}
-            value={comment.content}
+            value={commentContent}
+            onChange={(e) => setCommentContent(e.target.value)}
           ></textarea>
           <button
+            type={"submit"}
             className={
               "ml-auto mt-4 h-[3rem] w-[6.5rem] self-start rounded-lg bg-moderate-blue text-[1rem] font-semibold uppercase leading-6 text-light-gray hover:bg-light-grayish-blue"
             }
           >
             UPDATE
           </button>
-        </div>
+        </form>
       ) : (
-        <p className={"pt-[0.938rem] text-[1rem] leading-6 text-grayish-blue"}>{comment.content}</p>
+        <p className={"pt-[0.938rem] text-[1rem] leading-6 text-grayish-blue"}>{commentContent}</p>
       )}
     </div>
   );
