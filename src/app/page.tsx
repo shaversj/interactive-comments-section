@@ -17,7 +17,7 @@ export default function Home() {
   }, [state.comments]);
 
   return (
-    <div className="mx-auto w-[45.625rem]">
+    <div className="mx-auto w-[375px] md:w-[45.625rem]">
       <div className={"space-y-5"}>
         {state.comments.map((comment: UserComment) => (
           <Fragment key={comment.id}>

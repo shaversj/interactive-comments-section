@@ -27,7 +27,7 @@ export default function UserComment({ comment, currentUser, showReply, setShowRe
   }
 
   return (
-    <div className={"flex w-full flex-col"}>
+    <div className={"col-start-1 col-end-3 flex w-full flex-col md:col-start-2 md:col-end-5 md:row-start-1"}>
       <div className={"flex items-center gap-x-4"}>
         <Image className={"inline-block"} src={comment.user.image.png} alt={"Avatar"} width={32} height={32} />
         <span className={"text-[1rem] font-medium leading-[1.188rem] text-dark-blue"}>{comment.user.username}</span>
@@ -40,36 +40,36 @@ export default function UserComment({ comment, currentUser, showReply, setShowRe
 
         <span className={"inline text-[1rem] leading-6 text-grayish-blue"}>{comment.createdAt}</span>
 
-        {currentUser.username === comment.user.username ? (
-          <>
-            <div className={"ml-auto flex gap-x-6"}>
-              <button
-                onClick={() => dispatch && dispatch({ type: "DELETE", payload: comment.id })}
-                className={"group/delete flex items-center gap-x-[8.33px]"}
-              >
-                <Delete className={"fill-[#ED6368] group-hover/delete:fill-pale-red"} />
-                <span className={"mt-1 font-medium leading-6 text-soft-red group-hover/delete:text-pale-red"}>Delete</span>
-              </button>
+        {/*{currentUser.username === comment.user.username ? (*/}
+        {/*  <>*/}
+        {/*    <div className={"ml-auto flex gap-x-6"}>*/}
+        {/*      <button*/}
+        {/*        onClick={() => dispatch && dispatch({ type: "DELETE", payload: comment.id })}*/}
+        {/*        className={"group/delete flex items-center gap-x-[8.33px]"}*/}
+        {/*      >*/}
+        {/*        <Delete className={"fill-[#ED6368] group-hover/delete:fill-pale-red"} />*/}
+        {/*        <span className={"mt-1 font-medium leading-6 text-soft-red group-hover/delete:text-pale-red"}>Delete</span>*/}
+        {/*      </button>*/}
 
-              <button onClick={() => setIsEditing(!isEditing)} className={"group/edit flex items-center gap-x-[8.33px]"}>
-                <Edit className={"fill-[#5357B6] group-hover/edit:fill-light-grayish-blue"} />
-                <span className={"mt-1 font-medium leading-6 text-moderate-blue group-hover/edit:text-light-grayish-blue"}>Edit</span>
-              </button>
-            </div>
-          </>
-        ) : (
-          <>
-            <button
-              onClick={() => setShowReply && setShowReply(!showReply)}
-              className={
-                "group/reply ml-auto flex items-center gap-x-[0.328rem] font-medium leading-6 text-moderate-blue hover:text-light-grayish-blue"
-              }
-            >
-              <Reply className={"fill-[#5357B6] group-hover/reply:fill-light-grayish-blue"} />
-              Reply
-            </button>
-          </>
-        )}
+        {/*      <button onClick={() => setIsEditing(!isEditing)} className={"group/edit flex items-center gap-x-[8.33px]"}>*/}
+        {/*        <Edit className={"fill-[#5357B6] group-hover/edit:fill-light-grayish-blue"} />*/}
+        {/*        <span className={"mt-1 font-medium leading-6 text-moderate-blue group-hover/edit:text-light-grayish-blue"}>Edit</span>*/}
+        {/*      </button>*/}
+        {/*    </div>*/}
+        {/*  </>*/}
+        {/*) : (*/}
+        {/*  <>*/}
+        {/*    <button*/}
+        {/*      onClick={() => setShowReply && setShowReply(!showReply)}*/}
+        {/*      className={*/}
+        {/*        "group/reply ml-auto flex items-center gap-x-[0.328rem] font-medium leading-6 text-moderate-blue hover:text-light-grayish-blue"*/}
+        {/*      }*/}
+        {/*    >*/}
+        {/*      <Reply className={"fill-[#5357B6] group-hover/reply:fill-light-grayish-blue"} />*/}
+        {/*      Reply*/}
+        {/*    </button>*/}
+        {/*  </>*/}
+        {/*)}*/}
       </div>
 
       {isEditing ? (
