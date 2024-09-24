@@ -5,6 +5,7 @@ type UserComment = {
   score: number;
   replyingTo?: string;
   user: User;
+  username?: string;
   replies?: UserComment[];
 };
 

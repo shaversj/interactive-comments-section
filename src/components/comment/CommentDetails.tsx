@@ -1,9 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import Reply from "@/components/icons/Reply";
-import Delete from "@/components/icons/Delete";
-import Edit from "@/components/icons/Edit";
 import { useState } from "react";
 import { CommentAction } from "@/components/useComments";
 
@@ -15,7 +12,7 @@ type UserCommentProps = {
   dispatch?: React.Dispatch<CommentAction>;
 };
 
-export default function UserComment({ comment, currentUser, showReply, setShowReply, dispatch }: UserCommentProps) {
+export default function CommentDetails({ comment, currentUser, showReply, setShowReply, dispatch }: UserCommentProps) {
   const [isEditing, setIsEditing] = useState(false);
   const [commentContent, setCommentContent] = useState(comment.content);
 
@@ -27,7 +24,7 @@ export default function UserComment({ comment, currentUser, showReply, setShowRe
   }
 
   return (
-    <div className={"col-start-1 col-end-3 flex w-full flex-col md:col-start-2 md:col-end-5 md:row-start-1"}>
+    <div className={"col-start-1 col-end-3 flex flex-col md:col-end-5 md:row-start-1 md:ml-16"}>
       <div className={"flex items-center gap-x-4"}>
         <Image className={"inline-block"} src={comment.user.image.png} alt={"Avatar"} width={32} height={32} />
         <span className={"text-[1rem] font-medium leading-[1.188rem] text-dark-blue"}>{comment.user.username}</span>
@@ -92,7 +89,16 @@ export default function UserComment({ comment, currentUser, showReply, setShowRe
           </button>
         </form>
       ) : (
-        <p className={"pt-[0.938rem] text-[1rem] leading-6 text-grayish-blue"}>{commentContent}</p>
+        <p className={"w-full pt-[0.938rem] text-[1rem] leading-6 text-grayish-blue"}>
+          {comment.replyingTo ? (
+            <>
+              <span className={"font-medium text-moderate-blue"}>@{comment.replyingTo} </span>
+              {commentContent}
+            </>
+          ) : (
+            commentContent
+          )}
+        </p>
       )}
     </div>
   );

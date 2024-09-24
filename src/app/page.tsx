@@ -21,17 +21,31 @@ export default function Home() {
       <div className={"space-y-5"}>
         {state.comments.map((comment: UserComment) => (
           <Fragment key={comment.id}>
-            <UserCommentCard comment={comment} currentUser={state.currentUser} dispatch={dispatch} nextValidId={nextValidId} />
+            <UserCommentCard
+              comment={comment}
+              currentUser={state.currentUser}
+              dispatch={dispatch}
+              nextValidId={nextValidId}
+              replyToOriginalComment={false}
+            />
             {comment.replies && comment.replies.length > 0 && (
               <ReplyLayout>
                 {comment.replies.map((reply: UserComment) => (
-                  <UserCommentCard key={reply.id} comment={reply} currentUser={data.currentUser} dispatch={dispatch} nextValidId={nextValidId} />
+                  <UserCommentCard
+                    key={reply.id}
+                    parentCommentId={comment.id}
+                    comment={reply}
+                    currentUser={data.currentUser}
+                    dispatch={dispatch}
+                    nextValidId={nextValidId}
+                    replyToOriginalComment={false}
+                  />
                 ))}
               </ReplyLayout>
             )}
           </Fragment>
         ))}
-        <AddComment user={data.currentUser} dispatch={dispatch} />
+        <AddComment user={data.currentUser} dispatch={dispatch} nextValidId={nextValidId} replyToOriginalComment={true} />
       </div>
     </div>
   );

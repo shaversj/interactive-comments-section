@@ -2,11 +2,20 @@ import Delete from "@/components/icons/Delete";
 import Edit from "@/components/icons/Edit";
 import Reply from "@/components/icons/Reply";
 import { useState } from "react";
+import { CommentAction } from "@/components/useComments";
 
-export default function Stuff({ comment, currentUser, showReply, setShowReply, dispatch }) {
+type CommentActionsProps = {
+  comment: UserComment;
+  currentUser: User;
+  showReply?: boolean;
+  setShowReply?: (showReply: boolean) => void;
+  dispatch?: React.Dispatch<CommentAction>;
+};
+
+export default function CommentActions({ comment, currentUser, showReply, setShowReply, dispatch }: CommentActionsProps) {
   const [isEditing, setIsEditing] = useState(false);
   return (
-    <div className={"row-span-full row-start-3 mt-4 self-center md:col-span-full md:col-start-4 md:row-start-1 md:mt-0 md:self-start"}>
+    <div className={"row-span-full row-start-3 mt-4 self-center md:col-span-full md:col-start-4 md:row-start-1 md:ml-auto md:mt-0 md:self-start"}>
       {currentUser.username === comment.user.username ? (
         <>
           <div className={"ml-auto flex gap-x-6"}>

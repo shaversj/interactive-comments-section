@@ -3,14 +3,20 @@
 import { useReducer } from "react";
 
 export type CommentAction =
-  | { type: "ADD"; payload: { commentId: number; reply: UserComment } }
+  | { type: "ADD_COMMENT"; payload: { commentId: number; reply: UserComment } }
+  | { type: "ADD_REPLY"; payload: { commentId: number; reply: UserComment } }
   | { type: "DELETE"; payload: number }
   | { type: "UPDATE"; payload: { id: number; body: string } };
 
 export default function useComments({ initialState }: { initialState: CommentData }) {
   const commentReducer = (state: CommentData, action: CommentAction): CommentData => {
     switch (action.type) {
-      case "ADD":
+      case "ADD_COMMENT":
+        return {
+          ...state,
+          comments: [action.payload.reply, ...state.comments],
+        };
+      case "ADD_REPLY":
         return {
           ...state,
           comments: state.comments.map((comment) =>

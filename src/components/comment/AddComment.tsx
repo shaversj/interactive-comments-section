@@ -2,37 +2,70 @@
 
 import Image from "next/image";
 import { CommentAction } from "@/components/useComments";
+import { useState } from "react";
 
 type AddCommentProps = {
   user: User;
-  commentId?: number;
+  replyingToComment: UserComment;
   buttonText?: string;
-  dispatch?: React.Dispatch<CommentAction>;
+  dispatch: React.Dispatch<CommentAction>;
   setShowReply?: (showReply: boolean) => void;
-  nextValidId?: number;
+  nextValidId: number;
+  parentCommentId?: number;
+  replyToOriginalComment: boolean;
 };
 
-export default function AddComment({ user, commentId, buttonText = "Comment", dispatch, setShowReply, nextValidId }: AddCommentProps) {
+export default function AddComment({
+  user,
+  replyingToComment,
+  buttonText = "Comment",
+  dispatch,
+  setShowReply,
+  nextValidId,
+  parentCommentId,
+  replyToOriginalComment,
+}: AddCommentProps) {
+  const [commentContent, setCommentContent] = useState("");
+
   function handleReplySubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const textAreaValue = (e.target as HTMLFormElement).querySelector("textarea")?.value;
 
-    {
-      commentId &&
-        dispatch &&
-        nextValidId &&
-        dispatch({
-          type: "ADD",
-          payload: {
-            commentId: commentId,
-            reply: { id: nextValidId, content: textAreaValue || "", createdAt: getTodayDate(), score: 0, user: user },
+    if (replyToOriginalComment) {
+      dispatch({
+        type: "ADD_COMMENT",
+        payload: {
+          commentId: nextValidId,
+          reply: {
+            id: nextValidId,
+            content: commentContent || "",
+            createdAt: getTodayDate(),
+            score: 0,
+            user: user,
           },
-        });
+        },
+      });
+    } else {
+      dispatch({
+        type: "ADD_REPLY",
+        payload: {
+          commentId: parentCommentId || replyingToComment.id,
+          reply: {
+            id: nextValidId,
+            content: commentContent || "",
+            createdAt: getTodayDate(),
+            score: 0,
+            user: user,
+            replyingTo: replyingToComment?.user?.username || replyingToComment?.replyingTo,
+          },
+        },
+      });
     }
 
     if (setShowReply) {
       setShowReply(false);
     }
+
+    setCommentContent("");
   }
 
   function getTodayDate() {
@@ -49,9 +82,10 @@ export default function AddComment({ user, commentId, buttonText = "Comment", di
         <Image className={"inline-block self-start"} src={user.image.png} alt={"Avatar"} width={40} height={40} />
         <textarea
           className={
-            "focus:outline-outline-red-600 h-full w-[31.625rem] rounded-xl border border-light-gray px-6 py-3 text-[1rem] text-grayish-blue focus:outline-2 focus:outline-moderate-blue"
+            "focus:outline-outline-red-600 h-full rounded-xl border border-light-gray px-6 py-3 text-[1rem] text-grayish-blue focus:outline-2 focus:outline-moderate-blue md:w-full"
           }
           placeholder={"Add a comment..."}
+          onChange={(e) => setCommentContent(e.target.value)}
         />
         <button
           type={"submit"}
