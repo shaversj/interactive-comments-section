@@ -6,7 +6,7 @@ import { useState } from "react";
 
 type AddCommentProps = {
   user: User;
-  replyingToComment: UserComment;
+  replyingToComment?: UserComment;
   buttonText?: string;
   dispatch: React.Dispatch<CommentAction>;
   setShowReply?: (showReply: boolean) => void;
@@ -38,7 +38,7 @@ export default function AddComment({
           reply: {
             id: nextValidId,
             content: commentContent || "",
-            createdAt: getTodayDate(),
+            createdAt: new Date().getTime(),
             score: 0,
             user: user,
           },
@@ -48,11 +48,11 @@ export default function AddComment({
       dispatch({
         type: "ADD_REPLY",
         payload: {
-          commentId: parentCommentId || replyingToComment.id,
+          commentId: parentCommentId || replyingToComment?.id || 0,
           reply: {
             id: nextValidId,
-            content: commentContent || "",
-            createdAt: getTodayDate(),
+            content: commentContent,
+            createdAt: new Date().getTime(),
             score: 0,
             user: user,
             replyingTo: replyingToComment?.user?.username || replyingToComment?.replyingTo,
@@ -68,14 +68,6 @@ export default function AddComment({
     setCommentContent("");
   }
 
-  function getTodayDate() {
-    const today = new Date();
-    const year = today.getFullYear();
-    const month = today.getMonth() + 1;
-    const day = today.getDate();
-    return `${year}-${month < 10 ? `0${month}` : month}-${day < 10 ? `0${day}` : day}`;
-  }
-
   return (
     <>
       <form onSubmit={(e) => handleReplySubmit(e)} className={"ml-5 mt-5 flex h-[9rem] min-w-0 items-center gap-x-4 rounded-xl bg-white p-6"}>
@@ -86,6 +78,7 @@ export default function AddComment({
           }
           placeholder={"Add a comment..."}
           onChange={(e) => setCommentContent(e.target.value)}
+          value={commentContent}
         />
         <button
           type={"submit"}

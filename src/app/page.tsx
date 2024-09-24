@@ -1,15 +1,15 @@
 "use client";
 
 import { useEffect, useState, Fragment } from "react";
-import data from "@/data/data.json";
 import AddComment from "@/components/comment/AddComment";
 import UserCommentCard from "@/components/comment/UserCommentCard";
 import ReplyLayout from "@/components/comment/ReplyLayout";
 import useComments from "@/components/useComments";
 import { getNextValidId } from "@/utils/utils";
+import { customCommentData } from "@/data/custom-data";
 
 export default function Home() {
-  const { state, dispatch } = useComments({ initialState: data });
+  const { state, dispatch } = useComments({ initialState: customCommentData });
   const [nextValidId, setNextValidId] = useState(getNextValidId({ commentData: state }));
 
   useEffect(() => {
@@ -35,7 +35,7 @@ export default function Home() {
                     key={reply.id}
                     parentCommentId={comment.id}
                     comment={reply}
-                    currentUser={data.currentUser}
+                    currentUser={customCommentData.currentUser}
                     dispatch={dispatch}
                     nextValidId={nextValidId}
                     replyToOriginalComment={false}
@@ -45,7 +45,13 @@ export default function Home() {
             )}
           </Fragment>
         ))}
-        <AddComment user={data.currentUser} dispatch={dispatch} nextValidId={nextValidId} replyToOriginalComment={true} />
+        <AddComment
+          user={customCommentData.currentUser}
+          dispatch={dispatch}
+          nextValidId={nextValidId}
+          replyToOriginalComment={true}
+          buttonText={"SEND"}
+        />
       </div>
     </div>
   );

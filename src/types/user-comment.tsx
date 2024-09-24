@@ -1,7 +1,7 @@
 type UserComment = {
   id: number;
   content: string;
-  createdAt: string;
+  createdAt: number;
   score: number;
   replyingTo?: string;
   user: User;

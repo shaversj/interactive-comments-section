@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useState } from "react";
 import { CommentAction } from "@/components/useComments";
+import { formatDate } from "@/utils/utils";
 
 type UserCommentProps = {
   comment: UserComment;
@@ -35,38 +36,7 @@ export default function CommentDetails({ comment, currentUser, showReply, setSho
           </div>
         )}
 
-        <span className={"inline text-[1rem] leading-6 text-grayish-blue"}>{comment.createdAt}</span>
-
-        {/*{currentUser.username === comment.user.username ? (*/}
-        {/*  <>*/}
-        {/*    <div className={"ml-auto flex gap-x-6"}>*/}
-        {/*      <button*/}
-        {/*        onClick={() => dispatch && dispatch({ type: "DELETE", payload: comment.id })}*/}
-        {/*        className={"group/delete flex items-center gap-x-[8.33px]"}*/}
-        {/*      >*/}
-        {/*        <Delete className={"fill-[#ED6368] group-hover/delete:fill-pale-red"} />*/}
-        {/*        <span className={"mt-1 font-medium leading-6 text-soft-red group-hover/delete:text-pale-red"}>Delete</span>*/}
-        {/*      </button>*/}
-
-        {/*      <button onClick={() => setIsEditing(!isEditing)} className={"group/edit flex items-center gap-x-[8.33px]"}>*/}
-        {/*        <Edit className={"fill-[#5357B6] group-hover/edit:fill-light-grayish-blue"} />*/}
-        {/*        <span className={"mt-1 font-medium leading-6 text-moderate-blue group-hover/edit:text-light-grayish-blue"}>Edit</span>*/}
-        {/*      </button>*/}
-        {/*    </div>*/}
-        {/*  </>*/}
-        {/*) : (*/}
-        {/*  <>*/}
-        {/*    <button*/}
-        {/*      onClick={() => setShowReply && setShowReply(!showReply)}*/}
-        {/*      className={*/}
-        {/*        "group/reply ml-auto flex items-center gap-x-[0.328rem] font-medium leading-6 text-moderate-blue hover:text-light-grayish-blue"*/}
-        {/*      }*/}
-        {/*    >*/}
-        {/*      <Reply className={"fill-[#5357B6] group-hover/reply:fill-light-grayish-blue"} />*/}
-        {/*      Reply*/}
-        {/*    </button>*/}
-        {/*  </>*/}
-        {/*)}*/}
+        <span className={"inline text-[1rem] leading-6 text-grayish-blue"}>{formatDate(comment.createdAt)}</span>
       </div>
 
       {isEditing ? (
