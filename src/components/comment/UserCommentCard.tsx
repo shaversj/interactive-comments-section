@@ -25,6 +25,12 @@ export default function UserCommentCard({
   replyToOriginalComment = false,
 }: UserCommentCardProps) {
   const [showReply, setShowReply] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
+
+  const toggleEditMode = () => {
+    setIsEditing(!isEditing);
+  };
+
   return (
     <>
       <div className={""}>
@@ -33,8 +39,23 @@ export default function UserCommentCard({
         >
           <Vote comment={comment} />
 
-          <CommentDetails comment={comment} currentUser={currentUser} showReply={showReply} setShowReply={setShowReply} dispatch={dispatch} />
-          <CommentActions comment={comment} currentUser={currentUser} showReply={showReply} setShowReply={setShowReply} dispatch={dispatch} />
+          <CommentDetails
+            comment={comment}
+            currentUser={currentUser}
+            showReply={showReply}
+            setShowReply={setShowReply}
+            dispatch={dispatch}
+            toggleEditMode={toggleEditMode}
+            isEditing={isEditing}
+          />
+          <CommentActions
+            comment={comment}
+            currentUser={currentUser}
+            showReply={showReply}
+            setShowReply={setShowReply}
+            dispatch={dispatch}
+            toggleEditMode={toggleEditMode}
+          />
         </div>
         {showReply && (
           <AddComment

@@ -31,49 +31,40 @@ export default function useComments({ initialState }: { initialState: CommentDat
       case "DELETE":
         return {
           ...state,
-          comments: state.comments.map((comment) =>
-            comment.id === action.payload
-              ? {
-                  ...comment,
-                  replies: comment.replies ? comment.replies.filter((reply) => reply.id !== action.payload) : [],
-                }
-              : {
-                  ...comment,
-                  replies: comment.replies ? comment.replies.filter((reply) => reply.id !== action.payload) : [],
-                },
-          ),
+          comments: state.comments
+            .filter((comment) => comment.id !== action.payload)
+            .map((comment) => ({
+              ...comment,
+              replies: comment.replies ? comment.replies.filter((reply) => reply.id !== action.payload) : [],
+            })),
         };
       case "UPDATE":
-        const updatedComments = state.comments.map((comment) =>
-          comment.id === action.payload.id
-            ? {
-                ...comment,
-                body: action.payload.body,
-              }
-            : comment,
-        );
+        const updatedComments = state.comments.map((comment) => {
+          if (comment.id === action.payload.id) {
+            return {
+              ...comment,
+              body: action.payload.body,
+            };
+          }
+          if (comment.replies) {
+            return {
+              ...comment,
+              replies: comment.replies.map((reply) =>
+                reply.id === action.payload.id
+                  ? {
+                      ...reply,
+                      body: action.payload.body,
+                    }
+                  : reply,
+              ),
+            };
+          }
+          return comment;
+        });
 
-        const updatedReplies = state.comments.map((comment) =>
-          comment.replies
-            ? {
-                ...comment,
-                replies: comment.replies.map((reply) =>
-                  reply.id === action.payload.id
-                    ? {
-                        ...reply,
-                        body: action.payload.body,
-                      }
-                    : reply,
-                ),
-              }
-            : comment,
-        );
         return {
           ...state,
-          comments: updatedComments.map((comment, index) => ({
-            ...comment,
-            replies: updatedReplies[index].replies,
-          })),
+          comments: updatedComments,
         };
       default:
         return state;

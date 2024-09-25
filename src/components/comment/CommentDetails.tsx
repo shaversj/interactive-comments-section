@@ -11,17 +11,18 @@ type UserCommentProps = {
   showReply?: boolean;
   setShowReply?: (showReply: boolean) => void;
   dispatch?: React.Dispatch<CommentAction>;
+  isEditing: boolean;
+  toggleEditMode: () => void;
 };
 
-export default function CommentDetails({ comment, currentUser, showReply, setShowReply, dispatch }: UserCommentProps) {
-  const [isEditing, setIsEditing] = useState(false);
+export default function CommentDetails({ comment, currentUser, showReply, setShowReply, dispatch, isEditing, toggleEditMode }: UserCommentProps) {
   const [commentContent, setCommentContent] = useState(comment.content);
 
   function handleUpdate(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const textAreaValue = (e.target as HTMLFormElement).querySelector("textarea")?.value;
     dispatch && dispatch({ type: "UPDATE", payload: { id: comment.id, body: textAreaValue || "" } });
-    setIsEditing(false);
+    toggleEditMode();
   }
 
   return (
