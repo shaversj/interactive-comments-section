@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
-import { CommentAction } from "@/components/useComments";
+import { CommentAction } from "@/hooks/useComments";
 import { formatDate } from "@/utils/utils";
 
 type UserCommentProps = {

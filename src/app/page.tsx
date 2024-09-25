@@ -1,20 +1,16 @@
 "use client";
 
-import { useEffect, useState, Fragment } from "react";
+import { Fragment } from "react";
 import AddComment from "@/components/comment/AddComment";
 import CommentCard from "@/components/comment/CommentCard";
 import CommentReplyLayout from "@/components/comment/CommentReplyLayout";
-import useComments from "@/components/useComments";
-import { getNextValidId } from "@/utils/utils";
+import useComments from "@/hooks/useComments";
 import { customCommentData } from "@/data/custom-data";
+import useNextValidId from "@/hooks/useNextValidId";
 
 export default function Home() {
   const { state, dispatch } = useComments({ initialState: customCommentData });
-  const [nextValidId, setNextValidId] = useState(getNextValidId({ commentData: state }));
-
-  useEffect(() => {
-    setNextValidId(getNextValidId({ commentData: state }));
-  }, [state.comments]);
+  const nextValidId = useNextValidId(state);
 
   return (
     <div className="mx-auto w-[375px] md:w-[45.625rem]">

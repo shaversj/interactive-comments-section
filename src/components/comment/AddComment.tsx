@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { CommentAction } from "@/components/useComments";
+import { CommentAction } from "@/hooks/useComments";
 import { useState } from "react";
 
 type AddCommentProps = {

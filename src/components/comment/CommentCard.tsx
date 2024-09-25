@@ -3,7 +3,7 @@
 import Vote from "@/components/comment/Vote";
 import React, { useState } from "react";
 import AddComment from "@/components/comment/AddComment";
-import { CommentAction } from "@/components/useComments";
+import { CommentAction } from "@/hooks/useComments";
 import CommentActions from "@/components/comment/CommentActions";
 import CommentDetails from "@/components/comment/CommentDetails";
 

@@ -1,7 +1,7 @@
 import Delete from "@/components/icons/Delete";
 import Edit from "@/components/icons/Edit";
 import Reply from "@/components/icons/Reply";
-import { CommentAction } from "@/components/useComments";
+import { CommentAction } from "@/hooks/useComments";
 
 type CommentActionsProps = {
   comment: UserComment;
