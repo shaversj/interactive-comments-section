@@ -3,7 +3,7 @@
 import { useEffect, useState, Fragment } from "react";
 import AddComment from "@/components/comment/AddComment";
 import UserCommentCard from "@/components/comment/UserCommentCard";
-import ReplyLayout from "@/components/comment/ReplyLayout";
+import CommentReplyLayout from "@/components/comment/CommentReplyLayout";
 import useComments from "@/components/useComments";
 import { getNextValidId } from "@/utils/utils";
 import { customCommentData } from "@/data/custom-data";
@@ -29,7 +29,7 @@ export default function Home() {
               replyToOriginalComment={false}
             />
             {comment.replies && comment.replies.length > 0 && (
-              <ReplyLayout>
+              <CommentReplyLayout>
                 {comment.replies.map((reply: UserComment) => (
                   <UserCommentCard
                     key={reply.id}
@@ -41,7 +41,7 @@ export default function Home() {
                     replyToOriginalComment={false}
                   />
                 ))}
-              </ReplyLayout>
+              </CommentReplyLayout>
             )}
           </Fragment>
         ))}
