@@ -2,7 +2,7 @@
 
 import { useEffect, useState, Fragment } from "react";
 import AddComment from "@/components/comment/AddComment";
-import UserCommentCard from "@/components/comment/UserCommentCard";
+import CommentCard from "@/components/comment/CommentCard";
 import CommentReplyLayout from "@/components/comment/CommentReplyLayout";
 import useComments from "@/components/useComments";
 import { getNextValidId } from "@/utils/utils";
@@ -21,7 +21,7 @@ export default function Home() {
       <div className={"space-y-5"}>
         {state.comments.map((comment: UserComment) => (
           <Fragment key={comment.id}>
-            <UserCommentCard
+            <CommentCard
               comment={comment}
               currentUser={state.currentUser}
               dispatch={dispatch}
@@ -31,7 +31,7 @@ export default function Home() {
             {comment.replies && comment.replies.length > 0 && (
               <CommentReplyLayout>
                 {comment.replies.map((reply: UserComment) => (
-                  <UserCommentCard
+                  <CommentCard
                     key={reply.id}
                     parentCommentId={comment.id}
                     comment={reply}

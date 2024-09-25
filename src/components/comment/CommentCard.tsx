@@ -16,7 +16,7 @@ type UserCommentCardProps = {
   replyToOriginalComment: boolean;
 };
 
-export default function UserCommentCard({
+export default function CommentCard({
   comment,
   currentUser,
   dispatch,
