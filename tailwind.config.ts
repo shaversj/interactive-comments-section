@@ -14,6 +14,7 @@ const config: Config = {
         "light-gray": "hsl(223, 19%, 93%)",
         "very-light-gray": "hsl(228, 33%, 97%)",
         white: "hsl(0, 0%, 100%)",
+        "modal-bg": "hsl(240, 1% 49%)",
       },
       fontFamily: {
         rubik: ["var(--font-rubik)"],

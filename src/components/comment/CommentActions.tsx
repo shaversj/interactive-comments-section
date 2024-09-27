@@ -2,26 +2,27 @@ import Delete from "@/components/icons/Delete";
 import Edit from "@/components/icons/Edit";
 import Reply from "@/components/icons/Reply";
 import { CommentAction } from "@/hooks/useComments";
+import useModal from "@/hooks/useModal";
+import Modal from "@/components/comment/Modal";
 
 type CommentActionsProps = {
   comment: UserComment;
   currentUser: User;
   showReply?: boolean;
   setShowReply?: (showReply: boolean) => void;
-  dispatch?: React.Dispatch<CommentAction>;
+  dispatch: React.Dispatch<CommentAction>;
   toggleEditMode?: () => void;
 };
 
 export default function CommentActions({ comment, currentUser, showReply, setShowReply, dispatch, toggleEditMode }: CommentActionsProps) {
+  const { isOpen, openModal, closeModal } = useModal();
   return (
     <div className={"row-span-full row-start-3 mt-4 self-center md:col-span-full md:col-start-4 md:row-start-1 md:ml-auto md:mt-0 md:self-start"}>
+      <Modal isOpen={isOpen} onClose={closeModal} dispatch={dispatch} comment={comment} closeModal={closeModal} />
       {currentUser.username === comment.user.username ? (
         <>
           <div className={"ml-auto flex gap-x-6"}>
-            <button
-              onClick={() => dispatch && dispatch({ type: "DELETE", payload: comment.id })}
-              className={"group/delete flex items-center gap-x-[8.33px]"}
-            >
+            <button onClick={openModal} className={"group/delete flex items-center gap-x-[8.33px]"}>
               <Delete className={"fill-[#ED6368] group-hover/delete:fill-pale-red"} />
               <span className={"mt-1 font-medium leading-6 text-soft-red group-hover/delete:text-pale-red"}>Delete</span>
             </button>
