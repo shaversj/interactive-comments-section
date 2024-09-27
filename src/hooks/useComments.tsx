@@ -6,7 +6,8 @@ export type CommentAction =
   | { type: "ADD_COMMENT"; payload: { commentId: number; reply: UserComment } }
   | { type: "ADD_REPLY"; payload: { commentId: number; reply: UserComment } }
   | { type: "DELETE"; payload: number }
-  | { type: "UPDATE"; payload: { id: number; body: string } };
+  | { type: "UPDATE"; payload: { id: number; body: string } }
+  | { type: "UPDATE_SCORE"; payload: { id: number; score: number } };
 
 export default function useComments({ initialState }: { initialState: CommentData }) {
   const commentReducer = (state: CommentData, action: CommentAction): CommentData => {
@@ -66,6 +67,28 @@ export default function useComments({ initialState }: { initialState: CommentDat
           ...state,
           comments: updatedComments,
         };
+      case "UPDATE_SCORE":
+        const updatedCommentss = state.comments.map((comment) => {
+          if (comment.id === action.payload.id) {
+            return {
+              ...comment,
+              score: action.payload.score,
+            };
+          }
+          if (comment.replies) {
+            return {
+              ...comment,
+              replies: comment.replies.map((reply) => (reply.id === action.payload.id ? { ...reply, score: action.payload.score } : reply)),
+            };
+          }
+          return comment;
+        });
+
+        return {
+          ...state,
+          comments: updatedCommentss,
+        };
+
       default:
         return state;
     }
