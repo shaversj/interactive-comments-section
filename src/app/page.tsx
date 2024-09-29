@@ -13,7 +13,7 @@ export default function Home() {
   const nextValidId = useNextValidId(state);
 
   return (
-    <main className="mx-auto w-[375px] md:w-[45.625rem]">
+    <main className="mx-auto pt-8 md:w-[45.625rem] md:pt-16">
       <section className={"space-y-5"}>
         {state.comments
           .sort((a, b) => b.score - a.score)

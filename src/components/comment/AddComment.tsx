@@ -70,11 +70,16 @@ export default function AddComment({
 
   return (
     <>
-      <form onSubmit={(e) => handleReplySubmit(e)} className={"ml-5 mt-5 flex h-[9rem] min-w-0 items-center gap-x-4 rounded-xl bg-white p-6"}>
-        <Image className={"inline-block self-start"} src={user.image.png} alt={"Avatar"} width={40} height={40} />
+      <form
+        onSubmit={(e) => handleReplySubmit(e)}
+        className={
+          "mt-5 grid h-[189px] min-w-0 grid-rows-[1fr,auto] gap-y-4 rounded-xl bg-white p-4 md:h-[9rem] md:grid-cols-[auto,1fr,auto] md:grid-rows-1 md:items-center md:gap-x-4 md:p-6"
+        }
+      >
+        <Image className={"inline-block self-center md:self-start"} src={user.image.png} alt={"Avatar"} width={40} height={40} />
         <textarea
           className={
-            "focus:outline-outline-red-600 h-full rounded-xl border border-light-gray px-6 py-3 text-[1rem] text-grayish-blue focus:outline-2 focus:outline-moderate-blue md:w-full"
+            "col-start-1 col-end-3 row-start-1 h-full rounded-xl border border-light-gray px-6 py-3 text-grayish-blue focus:outline-2 focus:outline-moderate-blue md:col-start-auto"
           }
           placeholder={"Add a comment..."}
           onChange={(e) => setCommentContent(e.target.value)}
@@ -83,7 +88,7 @@ export default function AddComment({
         <button
           type={"submit"}
           className={
-            "h-[3rem] w-[6.5rem] self-start rounded-lg bg-moderate-blue text-[1rem] font-semibold uppercase leading-6 text-light-gray hover:bg-light-grayish-blue"
+            "ml-auto h-[3rem] w-[6.5rem] self-start rounded-lg bg-moderate-blue font-semibold uppercase leading-6 text-light-gray hover:bg-light-grayish-blue"
           }
         >
           {buttonText}

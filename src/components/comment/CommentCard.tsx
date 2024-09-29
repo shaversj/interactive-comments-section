@@ -33,7 +33,7 @@ export default function CommentCard({
   };
 
   return (
-    <article>
+    <article className={"px-4 md:px-0"}>
       <CommentContainer showReply={showReply}>
         <Vote comment={comment} dispatch={dispatch} />
         <CommentDetails
