@@ -13,8 +13,8 @@ export default function Home() {
   const nextValidId = useNextValidId(state);
 
   return (
-    <div className="mx-auto w-[375px] md:w-[45.625rem]">
-      <div className={"space-y-5"}>
+    <main className="mx-auto w-[375px] md:w-[45.625rem]">
+      <section className={"space-y-5"}>
         {state.comments
           .sort((a, b) => b.score - a.score)
           .map((comment: UserComment) => (
@@ -52,7 +52,7 @@ export default function Home() {
           replyToOriginalComment={true}
           buttonText={"SEND"}
         />
-      </div>
-    </div>
+      </section>
+    </main>
   );
 }

@@ -22,12 +22,12 @@ export default function CommentActions({ comment, currentUser, showReply, setSho
       {currentUser.username === comment.user.username ? (
         <>
           <div className={"ml-auto flex gap-x-6"}>
-            <button onClick={openModal} className={"group/delete flex items-center gap-x-[8.33px]"}>
+            <button onClick={openModal} className={"group/delete flex items-center gap-x-[0.521rem]"}>
               <Delete className={"fill-[#ED6368] group-hover/delete:fill-pale-red"} />
               <span className={"mt-1 font-medium leading-6 text-soft-red group-hover/delete:text-pale-red"}>Delete</span>
             </button>
 
-            <button onClick={toggleEditMode} className={"group/edit flex items-center gap-x-[8.33px]"}>
+            <button onClick={toggleEditMode} className={"group/edit flex items-center gap-x-[0.521rem]"}>
               <Edit className={"fill-[#5357B6] group-hover/edit:fill-light-grayish-blue"} />
               <span className={"mt-1 font-medium leading-6 text-moderate-blue group-hover/edit:text-light-grayish-blue"}>Edit</span>
             </button>

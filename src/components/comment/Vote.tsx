@@ -13,15 +13,15 @@ export default function Vote({ comment, dispatch }: { comment: UserComment; disp
   return (
     <div
       className={
-        "row-span-full row-start-3 mt-4 flex h-[40px] w-[100px] items-center justify-between gap-x-[9.35px] rounded-lg bg-very-light-gray px-[15.58px] py-[15.59px] md:col-start-1 md:row-start-1 md:mt-0 md:h-[6.25rem] md:w-10 md:flex-col md:py-[11.9px]"
+        "row-span-full row-start-3 mt-4 flex h-10 w-[6.25rem] items-center justify-between gap-x-[0.584rem] rounded-lg bg-very-light-gray px-[0.974rem] py-[0.974rem] md:col-start-1 md:row-start-1 md:mt-0 md:h-[6.25rem] md:w-10 md:flex-col md:py-[0.744rem]"
       }
     >
-      <button className={"group/plus"} onClick={() => handleVote(true)}>
+      <button aria-label={"Upvote"} className={"group/plus"} onClick={() => handleVote(true)}>
         <Plus className={"fill-[#C5C6EF] group-hover/plus:fill-moderate-blue"} />
       </button>
 
       <span className={"font-medium text-moderate-blue"}>{comment.score}</span>
-      <button className={"group/minus"} onClick={() => handleVote(false)}>
+      <button aria-label={"Downvote"} className={"group/minus"} onClick={() => handleVote(false)}>
         <Minus className={"fill-[#C5C6EF] group-hover/minus:fill-moderate-blue"} />
       </button>
     </div>
