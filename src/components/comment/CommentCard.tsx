@@ -7,6 +7,7 @@ import { CommentAction } from "@/hooks/useComments";
 import CommentActions from "@/components/comment/CommentActions";
 import CommentDetails from "@/components/comment/CommentDetails";
 import CommentContainer from "@/components/comment/CommentContainer";
+import { User, UserComment } from "@/types/user-comment";
 
 type UserCommentCardProps = {
   comment: UserComment;

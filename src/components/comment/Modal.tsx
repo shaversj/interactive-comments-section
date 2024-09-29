@@ -2,13 +2,11 @@ import { CommentAction } from "@/hooks/useComments";
 
 export default function Modal({
   isOpen,
-  onClose,
   dispatch,
   comment,
   closeModal,
 }: {
   isOpen: boolean;
-  onClose: () => void;
   dispatch: React.Dispatch<CommentAction>;
   comment: UserComment;
   closeModal: () => void;
@@ -16,7 +14,7 @@ export default function Modal({
   if (!isOpen) return null;
 
   return (
-    <div className={"bg-modal-bg fixed inset-0 flex h-screen items-center justify-center bg-opacity-70"}>
+    <div className={"fixed inset-0 flex h-screen items-center justify-center bg-modal-bg bg-opacity-70"}>
       <div className={"h-[224px] w-[343px] rounded-lg bg-white px-[28px] py-6 md:h-[252px] md:w-[400px] md:p-8"}>
         <div className={"h-full w-full space-y-4 md:space-y-5"}>
           <h3 className={"text-xl font-medium leading-6 text-dark-blue md:text-2xl md:leading-[28px]"}>Delete Comment</h3>

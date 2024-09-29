@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { CommentAction } from "@/hooks/useComments";
 import { useState } from "react";
+import { User, UserComment } from "@/types/user-comment";
 
 type AddCommentProps = {
   user: User;

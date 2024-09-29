@@ -1,4 +1,4 @@
-type UserComment = {
+export type UserComment = {
   id: number;
   content: string;
   createdAt: number;
@@ -9,7 +9,7 @@ type UserComment = {
   replies?: UserComment[];
 };
 
-type User = {
+export type User = {
   image: {
     png: string;
     webp: string;
@@ -17,7 +17,7 @@ type User = {
   username: string;
 };
 
-type CommentData = {
+export type CommentData = {
   currentUser: User;
   comments: UserComment[];
 };

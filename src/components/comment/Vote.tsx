@@ -3,6 +3,7 @@
 import Plus from "@/components/icons/Plus";
 import Minus from "@/components/icons/Minus";
 import { CommentAction } from "@/hooks/useComments";
+import { UserComment } from "@/types/user-comment";
 
 export default function Vote({ comment, dispatch }: { comment: UserComment; dispatch: React.Dispatch<CommentAction> }) {
   const handleVote = (isUpVote: boolean) => {

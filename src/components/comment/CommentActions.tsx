@@ -4,6 +4,7 @@ import Reply from "@/components/icons/Reply";
 import { CommentAction } from "@/hooks/useComments";
 import useModal from "@/hooks/useModal";
 import Modal from "@/components/comment/Modal";
+import { User, UserComment } from "@/types/user-comment";
 
 type CommentActionsProps = {
   comment: UserComment;

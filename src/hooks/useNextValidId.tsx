@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { CommentData, UserComment } from "@/types/user-comment";
 
 export default function useNextValidId(state: CommentData) {
   const [nextValidId, setNextValidId] = useState(getNextValidId({ commentData: state }));

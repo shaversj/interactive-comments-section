@@ -4,18 +4,17 @@ import Image from "next/image";
 import { useState } from "react";
 import { CommentAction } from "@/hooks/useComments";
 import { formatDate } from "@/utils/utils";
+import { User, UserComment } from "@/types/user-comment";
 
 type UserCommentProps = {
   comment: UserComment;
   currentUser: User;
-  showReply?: boolean;
-  setShowReply?: (showReply: boolean) => void;
   dispatch?: React.Dispatch<CommentAction>;
   isEditing: boolean;
   toggleEditMode: () => void;
 };
 
-export default function CommentDetails({ comment, currentUser, showReply, setShowReply, dispatch, isEditing, toggleEditMode }: UserCommentProps) {
+export default function CommentDetails({ comment, currentUser, dispatch, isEditing, toggleEditMode }: UserCommentProps) {
   const [commentContent, setCommentContent] = useState(comment.content);
 
   function handleUpdate(e: React.FormEvent<HTMLFormElement>) {

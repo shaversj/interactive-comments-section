@@ -1,6 +1,7 @@
 "use client";
 
 import { useReducer } from "react";
+import type { UserComment, CommentData } from "@/types/user-comment";
 
 export type CommentAction =
   | { type: "ADD_COMMENT"; payload: { commentId: number; reply: UserComment } }

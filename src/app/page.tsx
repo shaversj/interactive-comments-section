@@ -6,6 +6,7 @@ import CommentCard from "@/components/comment/CommentCard";
 import CommentReplyLayout from "@/components/comment/CommentReplyLayout";
 import useComments from "@/hooks/useComments";
 import { customCommentData } from "@/data/custom-data";
+
 import useNextValidId from "@/hooks/useNextValidId";
 
 export default function Home() {
