@@ -73,7 +73,7 @@ export default function AddComment({
       <form
         onSubmit={(e) => handleReplySubmit(e)}
         className={
-          "mt-5 grid h-[189px] min-w-0 grid-rows-[1fr,auto] gap-y-4 rounded-xl bg-white p-4 md:h-[9rem] md:grid-cols-[auto,1fr,auto] md:grid-rows-1 md:items-center md:gap-x-4 md:p-6"
+          "mt-5 grid h-[11.813rem] min-w-0 grid-rows-[1fr,auto] gap-y-4 rounded-xl bg-white p-4 md:h-[9rem] md:grid-cols-[auto,1fr,auto] md:grid-rows-1 md:items-center md:gap-x-4 md:p-6"
         }
       >
         <Image className={"inline-block self-center md:self-start"} src={user.image.png} alt={"Avatar"} width={40} height={40} />
