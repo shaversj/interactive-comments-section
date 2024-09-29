@@ -27,7 +27,7 @@ export default function useNextValidId(state: CommentData) {
 
   useEffect(() => {
     setNextValidId(getNextValidId({ commentData: state }));
-  }, [state.comments]);
+  }, [state]);
 
   return nextValidId;
 }

@@ -19,7 +19,7 @@ export default function CommentActions({ comment, currentUser, showReply, setSho
   const { isOpen, openModal, closeModal } = useModal();
   return (
     <div className={"row-span-full row-start-3 mt-4 self-center md:col-span-full md:col-start-4 md:row-start-1 md:ml-auto md:mt-0 md:self-start"}>
-      <Modal isOpen={isOpen} onClose={closeModal} dispatch={dispatch} comment={comment} closeModal={closeModal} />
+      <Modal isOpen={isOpen} dispatch={dispatch} comment={comment} closeModal={closeModal} />
       {currentUser.username === comment.user.username ? (
         <>
           <div className={"ml-auto flex gap-x-6"}>

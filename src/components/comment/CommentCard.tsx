@@ -37,15 +37,7 @@ export default function CommentCard({
     <article className={"px-4 md:px-0"}>
       <CommentContainer showReply={showReply}>
         <Vote comment={comment} dispatch={dispatch} />
-        <CommentDetails
-          comment={comment}
-          currentUser={currentUser}
-          showReply={showReply}
-          setShowReply={setShowReply}
-          dispatch={dispatch}
-          toggleEditMode={toggleEditMode}
-          isEditing={isEditing}
-        />
+        <CommentDetails comment={comment} currentUser={currentUser} dispatch={dispatch} toggleEditMode={toggleEditMode} isEditing={isEditing} />
         <CommentActions
           comment={comment}
           currentUser={currentUser}
