@@ -16,7 +16,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${rubik.variable} relative h-full w-full bg-very-light-gray font-rubik antialiased lg:min-h-[50rem]`}>{children}</body>
+      <body className={`${rubik.variable} relative h-full w-full bg-very-light-gray font-rubik antialiased lg:min-h-[64rem]`}>{children}</body>
     </html>
   );
 }
